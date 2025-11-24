@@ -1,19 +1,13 @@
-import com.bytebloom.model.raw.TeamRaw
+import model.TeamRaw
 import java.io.File
+val allFileLines= File("src/main/resources/teams.csv").readLines().drop(1)
 
 fun parseTeamData(): List<TeamRaw>?{
-    val teamList=mutableListOf<TeamRaw>()
-    val readFile= File("src/main/resources/teams.csv").readLines()
-    val CheckFile= readFile.drop(1).forEach {
-            line -> if(line.isNotBlank()){
-        val parts = line.split(",").map { it.trim() }
-        val team=TeamRaw(parts[0],parts[1],parts[2])
-        teamList.add(team)
+
+    return allFileLines.map {currentRaw ->
+        val teamFields = currentRaw.split(",").
+                                     map { it.trim() }
+        TeamRaw(teamFields[0],teamFields[1],teamFields[2])
     }
-    }
-    return if(teamList.isEmpty()){
-        null
-    }else{
-       teamList
-    }
-}
+     }
+
