@@ -24,4 +24,12 @@ fun main() {
     } else {
         println("No team data available for parsing .")
     }
+    val build = DomainBuilder()
+    val text = build.buildDomainGraph()?.first()
+    text?.let {
+        println("TeamId: ${it.id}")
+        println("Team Name : ${it.name}")
+        println("Mentees: ")
+        it.mentees.forEach { mentee -> println("- ${mentee.name}") }
+    }
 }

@@ -1,0 +1,42 @@
+import domain.Mentee
+import domain.PerformanceSubmission
+import domain.Team
+val rawTeams=parseTeamData()
+val rawMentees=parseMenteeRaw()
+val rawSubmissions=parsePerformanceRaw()
+
+class DomainBuilder (){
+    fun buildDomainGraph(): List<Team>? {
+        val mentees = buildMenteesWithSubmissions()
+        val teams = buildTeamsWithMentees(mentees)
+        return teams
+
+    }
+    private fun buildMenteesWithSubmissions(): List<Mentee> {
+        val mapMentees = rawMentees.map { mentee ->
+            Mentee(mentee.menteeId, mentee.name, mentee.teamId, emptyList())
+        }
+        val maMentees = mapMentees.map{ mentee ->
+            val submissionForMentee =
+                rawSubmissions.filter { submission -> submission.menteeId == mentee.id }.map { rawPerformance ->
+                    PerformanceSubmission(
+                        rawPerformance.submissionId,
+                        rawPerformance.menteeId,
+                        rawPerformance.submissionType,
+                        rawPerformance.score
+                    )
+                }
+            mentee.copy(submissions = submissionForMentee)
+        }
+        return maMentees
+    }
+    private fun buildTeamsWithMentees(mentees: List<Mentee>): List<Team>?{
+        return rawTeams?.map{ teamRaw ->
+            val teamMentees= mentees.filter { it.team==teamRaw.teamId}
+            Team(teamRaw.teamId,teamRaw.teamName,teamMentees)
+
+
+        }
+
+    }
+}
