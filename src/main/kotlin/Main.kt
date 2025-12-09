@@ -6,15 +6,15 @@ import java.io.File
 
 fun main() {
     println("ByteBloom Academy: Ecosystem Project Starter")
-    val theNewMentees = parseMenteeRaw()
+    val theNewMenteess = parseMenteeRaw()
     if (theNewMentees!= null) {
-        println("totel mentees : {${theNewMentees .size}}")
+        println("totel menteess : {${theNewMenteess .size}}")
     } else {
         println("no  find data on mentees file")
     }
-    val theNewPerformance  = parsePerformanceRaw()
+    val theNewPerformances  = parsePerformanceRaw()
     if (theNewPerformance!= null) {
-        println("totel preformance : {${theNewPerformance.size}}")
+        println("totel preformances : {${theNewPerformances.size}}")
     } else {
         println("no  find data on predormance file")
     }
