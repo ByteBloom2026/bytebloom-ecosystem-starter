@@ -1,12 +1,11 @@
 import model.MenteeRaw
 import model.TeamRaw
-import model.PerformanceRaw
+import model.PerformanceSubmissionRaw
 import java.io.File
 
 val linesOfMentee = File("src/main/resources/mentees.csv").readLines().drop(1)
 val allFileLines = File("src/main/resources/teams.csv").readLines().drop(1)
 val linesOfPerformance = File("src/main/resources/performance.csv").readLines().drop(1)
-
 fun parseMenteeRaw(): List<MenteeRaw> {
     return linesOfMentee.map {
         val partsMentee = it.split(",")
@@ -16,23 +15,19 @@ fun parseMenteeRaw(): List<MenteeRaw> {
         )
     }
 }
-
 fun parseTeamData(): List<TeamRaw>? {
 
     return allFileLines.map { currentRaw ->
         val teamFields = currentRaw.split(",").map { it.trim() }
-        TeamRaw(teamFields[0], teamFields[1], teamFields[2])
+        TeamRaw(teamFields[0], teamFields[1], teamFields[2], emptyList())
     }
 }
-
-fun parsePerformanceRaw(): List<PerformanceRaw> {
+fun parsePerformanceRaw(): List<PerformanceSubmissionRaw> {
     return linesOfPerformance.map {
         val partsPerformance = it.split(",")
-        PerformanceRaw(
+        PerformanceSubmissionRaw(
             partsPerformance[0].trim(), partsPerformance[1].trim(),
             partsPerformance[2].trim(), partsPerformance[3].trim()
         )
     }
 }
-
-
