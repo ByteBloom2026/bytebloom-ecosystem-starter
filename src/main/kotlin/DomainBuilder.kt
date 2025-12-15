@@ -1,4 +1,3 @@
-
 import domain.Mentee
 import domain.PerformanceSubmission
 import domain.Team
@@ -15,13 +14,13 @@ class DomainBuilder() {
     }
     private fun buildMenteesWithSubmissions(): List<Mentee> {
         val basicMentees = rawMentees.map { mentee ->
-            Mentee(mentee.menteeId, mentee.name, mentee.teamId,emptyList())
+            Mentee(mentee.id, mentee.name, mentee.teamId,emptyList())
         }
         val linkMenteesWithSubmission = basicMentees.map { mentee ->
             val submissionForMentee =
                 rawSubmissions.filter { submission -> submission.menteeId == mentee.id }.map { rawPerformance ->
                     PerformanceSubmission(
-                        rawPerformance.submissionId,
+                        rawPerformance.id,
                         rawPerformance.menteeId,
                         rawPerformance.submissionType,
                         rawPerformance.score
@@ -36,12 +35,11 @@ class DomainBuilder() {
 }    private fun buildTeamsWithMentees(mentees: List<Mentee>): List<Team>? {
         return rawTeams?.map { teamRaw ->
             val teamMentees = mentees.filter { it.teamId == teamRaw.teamId }
-            Team(teamRaw.teamId, teamRaw.teamName, teamMentees)
+            Team(teamRaw.teamId, teamRaw.teamName, teamRaw.mentorLead)
 
 
         }
 
-    }
 }
 
 
