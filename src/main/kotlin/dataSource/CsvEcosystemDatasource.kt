@@ -21,7 +21,7 @@ val linesOfPerformance = File("src/main/resources/performance.csv").readLines().
 val linesOfproject = File("src/main/resources/project.csv").readLines().drop(1)
 val linesOfattendance = File("src/main/resources/attendance.csv").readLines().drop(1)
 
-class CsvEcosystemDatasource : EcoSystemDataSource {
+open class CsvEcosystemDatasource : EcoSystemDataSource {
 
     override fun getAllMentees(): List<menteeRow> {
         parseMenteeRow()
@@ -46,33 +46,33 @@ class CsvEcosystemDatasource : EcoSystemDataSource {
 
 
 
-    private fun parseMenteeRow (): List<Mentee> {
+    private fun parseMenteeRow (): List<menteeRow> {
         return  linesOfMentee.map {
             val partsMentee = it.split(",")
-            Mentee(
+            menteeRow(
                 partsMentee[0].trim(), partsMentee[1].trim(),
                 partsMentee[2].trim()
             )
         }
     }
-    private fun parseTeamRow ():List<Team>{
+    private fun parseTeamRow ():List<teamRow>{
         return lines0fTeam.map {
             val partsTeam=it.split(",")
-            Team(
+            teamRow(
                 partsTeam[0].trim(),partsTeam[1].trim(),
                 partsTeam[2].trim()
             )
         }
     }
-//  private fun parsePreformance () :List<projectRow>{
-//     return dataSource.linesOfPerformance.map {
-//         val partsPreformance = it.split(",")
-//         preformanceRow(
-//             partsPreformance[0].trim(),partsPreformance[1].trim(),
-//             partsPreformance[2].trim(),partsPreformance[3].trim()
-//         )
-//     }
-//    }
+  private fun parsePreformance () :List<preformanceRow>{
+     return dataSource.linesOfPerformance.map {
+         val partsPreformance = it.split(",")
+         preformanceRow(
+             partsPreformance[0].trim(),partsPreformance[1].trim(),
+             partsPreformance[2].trim(),partsPreformance[3].trim()
+         )
+     }
+    }
     private fun parseProject() :List<projectRow>{
         return linesOfproject.map {
             val partsproject = it.split(",")
