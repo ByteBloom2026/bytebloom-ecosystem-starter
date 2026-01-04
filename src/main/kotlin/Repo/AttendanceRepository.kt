@@ -4,7 +4,7 @@ import domain.model.attendance
 
 
 interface AttendanceRepository {
-    fun getattendance(): List<attendance>
-    //fun getAttendanceByMenteeId(menteeId: String):attendance?
+    fun getAllAttendance(): List<attendance>
+    fun getAttendanceByMenteeId(menteeId: String):attendance?
 
 }
