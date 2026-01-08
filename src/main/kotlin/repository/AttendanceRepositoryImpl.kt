@@ -2,12 +2,13 @@ package repository
 
 import Repo.AttendanceRepository
 import dataSource.CsvEcosystemDatasource
+import dataSource.EcoSystemDataSource
 import domain.model.attendance
 
 class AttendanceRepositoryImpl (
-    private val attendanceDataSource: CsvEcosystemDatasource
+    private val attendanceDataSource: EcoSystemDataSource
 ): AttendanceRepository {
-    override fun getattendance(): List<attendance> {
+    override fun getAllAttendance(): List<attendance> {
         return attendanceDataSource.getattendance().map { row
             ->
             attendance(
@@ -16,6 +17,10 @@ class AttendanceRepositoryImpl (
                 week_2 = row.week_2,
                 week_3 = row.week_3)
         }
+    }
+
+    override fun getAttendanceByMenteeId(menteeId: String): attendance? {
+       return getAllAttendance().find { it.menteeId == menteeId }
     }
 
 }

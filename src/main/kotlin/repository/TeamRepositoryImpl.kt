@@ -7,8 +7,8 @@ import domain.model.Team
 class TeamRepositoryImpl(
     private val teamDataSource: CsvEcosystemDatasource
 ) : TeamRepository{
-    override fun getTopTeam(): List<Team> {
-        return teamDataSource.getTopTeam().map { row ->
+    override fun getAllTeams(): List<Team> {
+        return teamDataSource.getTeam().map { row ->
             Team(
                 teamId = row.teamId,
                 teamName = row.teamName,
@@ -16,5 +16,14 @@ class TeamRepositoryImpl(
             )
 
         }
+    }
+
+
+    override fun getTeamById(teamId: String): Team? {
+        return getAllTeams().find { it.teamId==teamId }
+    }
+
+    override fun getMentorLeadByTeamId(teamId: String): String? {
+        return getTeamById(teamId)?.mentorLead
     }
 }
