@@ -1,29 +1,15 @@
 package repository
-
-import dataSource.CsvEcosystemDatasource
 import domain.model.Mentee
 import Repo.MenteeRepository
 import dataSource.EcoSystemDataSource
-
-class MenteeRepositoryImpl(private val menteeDataSource: EcoSystemDataSource
-): MenteeRepository {
-    override fun getAllMentees():List<Mentee> {
-        return menteeDataSource.getMentees().map { row ->
-            Mentee(
-                id = row.menteeId,
-                name = row.name,
-                teamId = row.teamId
-            )
-
-        }
-
-    }
-
-    override fun getMenteeById(id: String): Mentee? {
-        return getAllMentees().find { it.id===id  }
-    }
-
-    override fun getMenteesByTeamId(teamId: String): List<Mentee> {
-        return getAllMentees().filter { it.teamId==teamId }
-    }
+import domain.mappers.toDomain
+class MenteeRepositoryImpl(
+    private val dataSource: EcoSystemDataSource
+) : MenteeRepository {
+    override fun getAllMentees(): List<Mentee> =
+        dataSource.getMentees().map { it.toDomain() }
+    override fun getMenteeById(id: String): Mentee? =
+        getAllMentees().find { it.id == id }
+    override fun getMenteesByTeamId(teamId: String): List<Mentee> =
+        getAllMentees().filter { it.teamId == teamId }
 }

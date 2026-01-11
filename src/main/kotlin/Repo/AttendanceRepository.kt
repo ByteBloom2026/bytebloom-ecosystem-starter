@@ -1,10 +1,7 @@
 package Repo
-
-import domain.model.attendance
-
-
+import domain.model.Attendance
 interface AttendanceRepository {
-    fun getAllAttendance(): List<attendance>
-    fun getAttendanceByMenteeId(menteeId: String):attendance?
+    fun getAllAttendance(): List<Attendance>
+    fun getAttendanceByMenteeId(menteeId: String):Attendance?
 
 }

@@ -1,17 +1,13 @@
 package dataSource
-
-import dataSource.model.menteeRow
-import dataSource.model.teamRow
-import dataSource.model.preformanceRow
-import dataSource.model.projectRow
-import dataSource.model.attendanceRow
-import domain.model.Mentee
-
+import dataSource.model.MenteeRow
+import dataSource.model.TeamRow
+import dataSource.model.PerformanceRow
+import dataSource.model.ProjectRow
+import dataSource.model.AttendanceRow
 interface EcoSystemDataSource {
-
-    fun getMentees (): List<menteeRow>?
-    fun getTeam () : List<teamRow>
-    fun getpreformance () : List<preformanceRow>
-    fun getproject () :List<projectRow>
-    fun getattendance () : List<attendanceRow>
+    fun getMentees(): List<MenteeRow>?
+    fun getTeams(): List<TeamRow>
+    fun getPerformances(): List<PerformanceRow>
+    fun getProjects():List<ProjectRow>
+    fun getAttendances(): List<AttendanceRow>
 }

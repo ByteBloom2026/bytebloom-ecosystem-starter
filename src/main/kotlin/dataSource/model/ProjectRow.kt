@@ -1,6 +1,5 @@
 package dataSource.model
-
-data class projectRow(
+data class ProjectRow(
     val projectId  : String,
     val projectName :String,
     val teamId : String

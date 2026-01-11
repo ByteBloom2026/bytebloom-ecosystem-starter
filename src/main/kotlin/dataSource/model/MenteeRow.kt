@@ -1,6 +1,5 @@
 package dataSource.model
-
-data class menteeRow(
+data class MenteeRow(
     val menteeId: String,
     val name: String,
     val teamId: String

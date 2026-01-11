@@ -1,7 +1,6 @@
 package dataSource.model
-
-data class teamRow(
+data class TeamRow(
     val teamId: String,
     val teamName: String,
-    val mentorLead: String,
+    val mentorLead: String
 )

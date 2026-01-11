@@ -1,6 +1,5 @@
 package domain.model
-
-data class projects (
+data class Project (
     val projectId  : String,
     val projectName :String,
     val teamId : String
