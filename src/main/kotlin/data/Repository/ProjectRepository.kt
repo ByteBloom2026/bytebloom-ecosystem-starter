@@ -1,4 +1,4 @@
-package Repo
+package Repository
 import domain.model.Project
 interface ProjectRepository {
     fun getAllProjects(): List<Project>

@@ -1,5 +1,5 @@
-package domain.mappers
-import dataSource.model.ProjectRow
+package repository.mappers
+import data.dataSource.model.ProjectRow
 import domain.model.Project
 fun ProjectRow.toDomain(): Project =
     Project(

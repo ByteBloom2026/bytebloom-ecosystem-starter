@@ -1,14 +1,14 @@
 import java.io.File
-import dataSource.CsvEcosystemDataSource
+import data.dataSource.CsvEcosystemDataSource
 import repository.*
 import domain.EcosystemService
 fun main() {
     val csvDataSource = CsvEcosystemDataSource(
-        "src/main/resources/mentees.csv",
-        "src/main/resources/teams.csv",
-        "src/main/resources/performance.csv",
-        "src/main/resources/project.csv",
-        "src/main/resources/attendance.csv"
+        File("src/main/resources/mentees.csv"),
+        File("src/main/resources/teams.csv"),
+        File("src/main/resources/performance.csv"),
+        File("src/main/resources/projects.csv"),
+        File("src/main/resources/attendance.csv")
     )
     val menteeRepo = MenteeRepositoryImpl(csvDataSource)
     val teamRepo = TeamRepositoryImpl(csvDataSource)
@@ -31,5 +31,4 @@ fun main() {
     ecosystemService.findMenteesWithPerfectAttendance().forEach { println(it) }
     ecosystemService.flagMenteesWithPoorAttendance(2).forEach { println(it) }
     println(ecosystemService.generateTeamAttendanceReport("team1"))
-
 }

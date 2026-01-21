@@ -1,9 +1,9 @@
 package domain
-import Repo.AttendanceRepository
-import Repo.MenteeRepository
-import Repo.TeamRepository
-import Repo.PerformanceRepository
-import Repo.ProjectRepository
+import Repository.AttendanceRepository
+import Repository.MenteeRepository
+import Repository.TeamRepository
+import Repository.PerformanceRepository
+import Repository.ProjectRepository
 import domain.model.Mentee
 import domain.model.Team
 import domain.model.Project

@@ -1,4 +1,4 @@
-package dataSource.model
+package data.dataSource.model
 data class AttendanceRow(
     val menteeId : String ,
     val week_1 : String ,

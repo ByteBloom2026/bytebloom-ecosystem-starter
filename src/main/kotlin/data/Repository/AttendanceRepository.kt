@@ -1,4 +1,4 @@
-package Repo
+package Repository
 import domain.model.Attendance
 interface AttendanceRepository {
     fun getAllAttendance(): List<Attendance>

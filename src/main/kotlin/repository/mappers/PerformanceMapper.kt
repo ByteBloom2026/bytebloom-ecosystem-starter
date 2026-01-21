@@ -1,5 +1,5 @@
-package domain.mappers
-import dataSource.model.PerformanceRow
+package repository.mappers
+import data.dataSource.model.PerformanceRow
 import domain.model.PerformanceSubmission
 fun PerformanceRow.toDomain(): PerformanceSubmission =
     PerformanceSubmission(

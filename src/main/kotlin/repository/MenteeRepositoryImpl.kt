@@ -1,15 +1,15 @@
 package repository
 import domain.model.Mentee
-import Repo.MenteeRepository
-import dataSource.EcoSystemDataSource
-import domain.mappers.toDomain
+import Repository.MenteeRepository
+import data.dataSource.EcoSystemDataSource
+import repository.mappers.toDomain
 class MenteeRepositoryImpl(
     private val dataSource: EcoSystemDataSource
 ) : MenteeRepository {
     override fun getAllMentees(): List<Mentee> =
         dataSource.getMentees().map { it.toDomain() }
     override fun getMenteeById(id: String): Mentee? =
-        getAllMentees().find { it.id == id }
+        dataSource.getMenteeById(id)?.toDomain()
     override fun getMenteesByTeamId(teamId: String): List<Mentee> =
-        getAllMentees().filter { it.teamId == teamId }
+        dataSource.getMenteesByTeamId(teamId).map { it.toDomain() }
 }

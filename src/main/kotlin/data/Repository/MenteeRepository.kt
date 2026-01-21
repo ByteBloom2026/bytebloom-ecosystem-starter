@@ -1,4 +1,4 @@
-package Repo
+package Repository
 import domain.model.Mentee
 interface MenteeRepository {
     fun getAllMentees(): List<Mentee>
