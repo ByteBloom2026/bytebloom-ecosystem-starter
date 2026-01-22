@@ -1,7 +1,5 @@
-package Repo
-
+package Repository
 import domain.model.Team
-
 interface TeamRepository {
     fun getAllTeams(): List<Team>
     fun getTeamById(teamId: String): Team?

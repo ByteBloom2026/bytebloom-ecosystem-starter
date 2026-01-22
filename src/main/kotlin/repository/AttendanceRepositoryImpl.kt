@@ -1,26 +1,13 @@
 package repository
-
-import Repo.AttendanceRepository
-import dataSource.CsvEcosystemDatasource
-import dataSource.EcoSystemDataSource
-import domain.model.attendance
-
-class AttendanceRepositoryImpl (
-    private val attendanceDataSource: EcoSystemDataSource
-): AttendanceRepository {
-    override fun getAllAttendance(): List<attendance> {
-        return attendanceDataSource.getattendance().map { row
-            ->
-            attendance(
-                menteeId = row.menteeId,
-                week_1 = row.week_1,
-                week_2 = row.week_2,
-                week_3 = row.week_3)
-        }
-    }
-
-    override fun getAttendanceByMenteeId(menteeId: String): attendance? {
-       return getAllAttendance().find { it.menteeId == menteeId }
-    }
-
+import domain.model.Attendance
+import Repository.AttendanceRepository
+import data.dataSource.EcoSystemDataSource
+import repository.mappers.toDomain
+class AttendanceRepositoryImpl(
+    private val dataSource: EcoSystemDataSource
+) : AttendanceRepository {
+    override fun getAllAttendance(): List<Attendance> =
+        dataSource.getAttendances().map { it.toDomain() }
+    override fun getAttendanceByMenteeId(menteeId: String): Attendance? =
+        dataSource.getAttendanceByMenteeId(menteeId)?.toDomain()
 }
