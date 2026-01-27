@@ -1,10 +1,10 @@
 package domain.usecase
 import domain.model.Mentee
 import domain.model.Team
-
-class GetMenteeNamesByTeamName(//ايجاد جميع المتدربين عند ادخال اسم  الفريق
+class getMenteeNamesByTeamName  (
     private val mentees: List<Mentee>,
     private val teams: List<Team>
+
 ) {
     fun execute(teamName: String): List<String> {
         val teamId = teams
@@ -16,3 +16,5 @@ class GetMenteeNamesByTeamName(//ايجاد جميع المتدربين عند �
             .map { it.name }
     }
 }
+
+

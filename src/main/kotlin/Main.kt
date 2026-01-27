@@ -1,7 +1,10 @@
 import java.io.File
 import data.dataSource.CsvEcosystemDataSource
+import domain.model.Mentee
+import domain.model.Team
+import domain.usecase.getMenteeNamesByTeamName
+import domain.usecase.getTeamByMenteeName
 import repository.*
-import domain.EcosystemService
 fun main() {
     val csvDataSource = CsvEcosystemDataSource(
         File("src/main/resources/mentees.csv"),
@@ -15,20 +18,20 @@ fun main() {
     val performanceRepo = PerformanceRepositoryImpl(csvDataSource)
     val projectRepo = ProjectRepositoryImpl(csvDataSource)
     val attendanceRepo = AttendanceRepositoryImpl(csvDataSource)
-    val ecosystemService = EcosystemService(
-        teamRepo,
-        menteeRepo,
-        performanceRepo,
-        projectRepo,
-        attendanceRepo
-    )
-    ecosystemService.findTeamsWithNoProject().forEach { println(it) }
-    println(ecosystemService.findProjectAssignedToTeam("team1"))
-    println(ecosystemService.findLeadMentorForMentee("m001"))
-    println(ecosystemService.getOverallPerformanceAverageForTeam("team1"))
-    println(ecosystemService.findTopScoringMenteeOverall())
-    println(ecosystemService.getPerformanceBreakdownForMentee("m001"))
-    ecosystemService.findMenteesWithPerfectAttendance().forEach { println(it) }
-    ecosystemService.flagMenteesWithPoorAttendance(2).forEach { println(it) }
-    println(ecosystemService.generateTeamAttendanceReport("team1"))
+    val allMentees = menteeRepo.getAllMentees()
+    val allTeams = teamRepo.getAllTeams()
+
+    // call a function getMenteesNamesByTeamName
+   val GetMenteeNamesByTeamName= getMenteeNamesByTeamName(allMentees,allTeams)
+   val nameMentees=GetMenteeNamesByTeamName.execute("Alpha")
+   println( "the nameTeam : "+nameMentees)
+
+   // call a function getTeamByMenteeName
+    val GetTeamByMenteeName= getTeamByMenteeName(allMentees,allTeams)
+    val nameTeam=GetTeamByMenteeName.execute(" Mateo Gibson")
+    println( "the nameTeam : "+nameTeam)
+
+
+
+
 }
