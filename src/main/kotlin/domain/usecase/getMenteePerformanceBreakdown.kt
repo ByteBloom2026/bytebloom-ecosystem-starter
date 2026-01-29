@@ -6,7 +6,7 @@ import domain.averageOrZero
 class getMenteePerformanceBreakdown(
     private val performanceRepository: PerformanceRepository
 ) {
-    fun execute(menteeId: String): Map<String, Double> {
+    operator fun invoke(menteeId: String): Map<String, Double> {
         val submissions = performanceRepository.getPerformanceByMenteeId(menteeId)
         return submissions.groupBy { it.submissionType }
             .mapValues { (_, list) ->

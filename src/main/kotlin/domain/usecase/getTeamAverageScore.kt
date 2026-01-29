@@ -8,7 +8,7 @@ class getTeamAverageScore(
     private val menteeRepository: MenteeRepository,
     private val performanceRepository: PerformanceRepository
 ) {
-    fun execute(teamId: String): Double {
+    operator fun invoke(teamId: String): Double {
         val mentees = menteeRepository.getMenteesByTeamId(teamId)
         val allScores = mentees.flatMap { m ->
             performanceRepository.getPerformanceByMenteeId(m.id)

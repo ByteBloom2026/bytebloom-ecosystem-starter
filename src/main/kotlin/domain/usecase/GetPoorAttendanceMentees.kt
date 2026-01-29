@@ -6,7 +6,7 @@ class GetPoorAttendanceMentees (
     private val attendanceRepository: AttendanceRepository,
     private val menteeRepository: MenteeRepository
 )  {
-    fun execute(minAbsences: Int): List<Mentee> =
+    operator fun invoke(minAbsences: Int): List<Mentee> =
         menteeRepository.getAllMentees()
             .filter { mentee -> attendanceRepository.getAttendanceByMenteeId(mentee.id)
                     ?.weeks

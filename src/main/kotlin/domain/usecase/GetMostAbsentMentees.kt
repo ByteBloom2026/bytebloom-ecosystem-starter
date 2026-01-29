@@ -6,7 +6,7 @@ class GetMostAbsentMentees (
     private val menteeRepository: MenteeRepository,
     private val attendanceRepository: AttendanceRepository
 ){
-    fun execute(): List<Pair<Mentee, Int>> {
+    operator fun invoke(): List<Pair<Mentee, Int>> {
         return menteeRepository.getAllMentees()
             .mapNotNull { mentee ->
                 attendanceRepository.getAttendanceByMenteeId(mentee.id)

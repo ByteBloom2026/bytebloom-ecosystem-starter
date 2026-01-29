@@ -8,7 +8,7 @@ class GetAverageAttendancePercentagePerTeam (
     private val attendanceRepository: AttendanceRepository
 )
 {
-    fun execute(): Map<String, Double> {
+    operator fun invoke(): Map<String, Double> {
         return teamRepository.getAllTeams().associate { team ->
             val mentees = menteeRepository.getMenteesByTeamId(team.teamId)
 

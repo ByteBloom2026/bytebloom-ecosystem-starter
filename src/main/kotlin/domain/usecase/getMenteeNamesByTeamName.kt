@@ -1,17 +1,17 @@
 package domain.usecase
-import domain.model.Mentee
-import domain.model.Team
-class getMenteeNamesByTeamName  (
-    private val mentees: List<Mentee>,
-    private val teams: List<Team>
 
+import Repository.MenteeRepository
+import Repository.TeamRepository
+
+class getMenteeNamesByTeamName(
+    private val teamRepository: TeamRepository,
+    private val menteeRepository: MenteeRepository,
 ) {
-    fun execute(teamName: String): List<String> {
-        val teamId = teams
-            .find { it.teamName == teamName }
+    operator fun invoke(teamName: String): List<String> {
+        val teamId = teamRepository.getTeamById(teamId = String())
             ?.teamId
             ?: return emptyList()
-        return mentees
+        return menteeRepository.getAllMentees()
             .filter { it.teamId == teamId }
             .map { it.name }
     }

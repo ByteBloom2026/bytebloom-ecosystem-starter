@@ -7,7 +7,7 @@ class GetPerfectAttendanceMentees (
     private val menteeRepository: MenteeRepository
 )
 {
-    fun execute(): List<Mentee> =
+    operator fun invoke(): List<Mentee> =
         menteeRepository.getAllMentees()
             .filter { mentee -> attendanceRepository.getAttendanceByMenteeId(mentee.id)
                     ?.weeks

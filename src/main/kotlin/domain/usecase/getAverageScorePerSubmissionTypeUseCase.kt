@@ -3,10 +3,11 @@ package domain.usecase
 import Repository.PerformanceRepository
 import domain.averageOrZero
 
+
 class getAverageScorePerSubmissionTypeUseCase(
     private val performanceRepository: PerformanceRepository
 ) {
-    fun execute(): Map<String, Double> {
+    operator fun invoke(): Map<String, Double> {
         val allPerformances = performanceRepository.getAllPerformance()
 
         return allPerformances

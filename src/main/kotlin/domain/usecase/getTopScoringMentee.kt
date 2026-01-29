@@ -9,7 +9,7 @@ class getTopScoringMentee(
     private val menteeRepository: MenteeRepository,
     private val performanceRepository: PerformanceRepository
 ) {
-    fun execute(): Mentee? =
+    operator fun invoke(): Mentee? =
         menteeRepository.getAllMentees().maxByOrNull { m ->
             val scores = performanceRepository.getPerformanceByMenteeId(m.id)
                 .map { it.score.toDoubleOrNull() ?: 0.0 }

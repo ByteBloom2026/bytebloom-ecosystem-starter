@@ -9,7 +9,7 @@ class getMenteesWithLowAverageScoreUseCase(
     private val menteeRepository: MenteeRepository,
     private val performanceRepository: PerformanceRepository
 ) {
-    fun execute(threshold: Double): List<Mentee> {
+    operator fun invoke(threshold: Double): List<Mentee> {
         return menteeRepository.getAllMentees()
             .filter { mentee ->
                 val avgScore = performanceRepository.getPerformanceByMenteeId(mentee.id)
