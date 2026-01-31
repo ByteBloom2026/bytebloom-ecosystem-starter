@@ -1,6 +1,6 @@
 package domain.usecase
-import Repository.AttendanceRepository
-import Repository.MenteeRepository
+import data.repository.AttendanceRepository
+import data.repository.MenteeRepository
 import domain.model.Mentee
 class GetMostAbsentMentees (
     private val menteeRepository: MenteeRepository,

@@ -1,0 +1,23 @@
+package domain.usecase
+
+import data.repository.AttendanceRepository
+import data.repository.MenteeRepository
+
+
+class GenerateTeamAttendanceReportUseCaes(
+    private val attendanceRepository: AttendanceRepository,
+    private val menteeRepository: MenteeRepository
+) {
+    operator fun invoke(teamId: String): Map<String, Int> =
+        getAbsenceCountPerMentee(teamId)
+
+    private fun getAbsenceCountPerMentee(teamId: String): Map<String, Int> = menteeRepository.getMenteesByTeamId(teamId)
+        .associate { mentee ->
+            val absences = attendanceRepository
+                .getAttendanceByMenteeId(mentee.id)
+                ?.weeks
+                ?.count { it.uppercase() != "PRESENT" }
+                ?: 0
+            mentee.id to absences
+        }
+}
