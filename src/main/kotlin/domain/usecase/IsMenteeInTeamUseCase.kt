@@ -2,7 +2,6 @@ package domain.usecase
 import domain.model.Mentee
 import data.repository.MenteeRepository
 import data.repository.TeamRepository
-
 class IsMenteeInTeamUseCase(
     private val teamRepository: TeamRepository,
     private val menteeRepository: MenteeRepository,

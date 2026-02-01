@@ -2,7 +2,6 @@ package data.repository
 import domain.model.Mentee
 import data.EcoSystemDataSource
 import data.repository.mappers.toDomain
-
 class MenteeRepositoryImpl(
     private val dataSource: EcoSystemDataSource
 ) : MenteeRepository {

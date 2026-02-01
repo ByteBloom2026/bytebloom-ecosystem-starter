@@ -1,9 +1,7 @@
 package data.datasource
-
 import data.datasource.model.*
 import data.EcoSystemDataSource
 import java.io.File
-
 class CsvEcosystemDataSource(
     menteeFile: File, teamFile: File, performanceFile: File, projectFile: File, attendanceFile: File
 ) : EcoSystemDataSource {
@@ -45,12 +43,13 @@ class CsvEcosystemDataSource(
     }
 
     override fun getProjectByTeamId(teamId: String): ProjectRow? = getProjects().find { it.teamId == teamId }
-
     override fun getAttendances(): List<AttendanceRow> = attendanceLines.map {
         val parts = it.split(",")
-        AttendanceRow(parts[0].trim(), parts[1].trim(), parts[2].trim(), parts[3].trim())
+        AttendanceRow(
+            menteeId = parts[0].trim(),
+            weeks = parts.drop(1).joinToString(",")
+        )
     }
-
     override fun getAttendanceByMenteeId(menteeId: String): AttendanceRow? =
         getAttendances().find { it.menteeId == menteeId }
 }

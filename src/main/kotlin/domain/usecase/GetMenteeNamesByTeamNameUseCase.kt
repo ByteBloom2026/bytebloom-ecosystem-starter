@@ -1,8 +1,6 @@
 package domain.usecase
-
 import data.repository.MenteeRepository
 import data.repository.TeamRepository
-
 class GetMenteeNamesByTeamNameUseCase(
     private val teamRepository: TeamRepository,
     private val menteeRepository: MenteeRepository,

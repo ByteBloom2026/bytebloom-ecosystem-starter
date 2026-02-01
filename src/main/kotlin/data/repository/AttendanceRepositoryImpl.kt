@@ -2,7 +2,6 @@ package data.repository
 import domain.model.Attendance
 import data.EcoSystemDataSource
 import data.repository.mappers.toDomain
-
 class AttendanceRepositoryImpl(
     private val dataSource: EcoSystemDataSource
 ) : AttendanceRepository {

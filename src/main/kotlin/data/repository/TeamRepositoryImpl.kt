@@ -2,7 +2,6 @@ package data.repository
 import domain.model.Team
 import data.EcoSystemDataSource
 import data.repository.mappers.toDomain
-
 class TeamRepositoryImpl(
     private val dataSource: EcoSystemDataSource
 ) : TeamRepository {

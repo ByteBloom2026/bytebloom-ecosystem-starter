@@ -2,6 +2,7 @@ package domain.usecase
 import data.repository.AttendanceRepository
 import data.repository.MenteeRepository
 import domain.model.Mentee
+import domain.model.AttendanceState
 class GetPoorAttendanceMenteesUseCase (
     private val attendanceRepository: AttendanceRepository,
     private val menteeRepository: MenteeRepository
@@ -10,7 +11,7 @@ class GetPoorAttendanceMenteesUseCase (
         menteeRepository.getAllMentees()
             .filter { mentee -> attendanceRepository.getAttendanceByMenteeId(mentee.id)
                     ?.weeks
-                    ?.count { it.uppercase() != "PRESENT" }
+                    ?.count {it != AttendanceState.PRESENT }
                     ?.let { it >= minAbsences }
                     ?: false
             }

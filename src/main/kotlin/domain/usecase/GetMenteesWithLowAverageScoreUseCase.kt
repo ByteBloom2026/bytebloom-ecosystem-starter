@@ -1,9 +1,7 @@
 package domain.usecase
-
 import data.repository.MenteeRepository
 import data.repository.PerformanceRepository
 import domain.model.Mentee
-
 class GetMenteesWithLowAverageScoreUseCase(
     private val menteeRepository: MenteeRepository,
     private val performanceRepository: PerformanceRepository

@@ -1,9 +1,8 @@
 package domain.model
 data class Attendance(
     val menteeId: String,
-    val weeks: String,
-    val attendanceState: attendanceState
+    val weeks: List<AttendanceState>
     )
-enum class attendanceState(){
+enum class AttendanceState {
     LATE,PRESENT,ABSENT
 }

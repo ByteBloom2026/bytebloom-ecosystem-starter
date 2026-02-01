@@ -1,9 +1,6 @@
 package domain.usecase
-
 import data.repository.MenteeRepository
 import data.repository.PerformanceRepository
-
-
 class GetTeamAverageScoreUseCase(
     private val menteeRepository: MenteeRepository,
     private val performanceRepository: PerformanceRepository

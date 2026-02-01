@@ -1,9 +1,7 @@
 package domain.usecase
-
 import data.repository.AttendanceRepository
 import data.repository.MenteeRepository
-
-
+import domain.model.AttendanceState
 class GenerateTeamAttendanceReportUseCaes(
     private val attendanceRepository: AttendanceRepository,
     private val menteeRepository: MenteeRepository
@@ -16,7 +14,7 @@ class GenerateTeamAttendanceReportUseCaes(
             val absences = attendanceRepository
                 .getAttendanceByMenteeId(mentee.id)
                 ?.weeks
-                ?.count { it.uppercase() != "PRESENT" }
+                ?.count {it != AttendanceState.PRESENT  }
                 ?: 0
             mentee.id to absences
         }

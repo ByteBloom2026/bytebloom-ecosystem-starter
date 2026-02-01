@@ -2,6 +2,7 @@ package domain.usecase
 import data.repository.AttendanceRepository
 import data.repository.MenteeRepository
 import data.repository.TeamRepository
+import domain.model.AttendanceState
 class GetAverageAttendancePercentagePerTeamUesCase (
     private val teamRepository: TeamRepository,
     private val menteeRepository: MenteeRepository,
@@ -16,8 +17,8 @@ class GetAverageAttendancePercentagePerTeamUesCase (
                 attendanceRepository.getAttendanceByMenteeId(mentee.id)
                     ?.weeks
                     ?.let { weeks ->
-                        val presentCount = weeks.count { it.uppercase() == "PRESENT" }
-                        (presentCount.toDouble() / weeks.length) * 100
+                        val presentCount = weeks.count { it != AttendanceState.PRESENT }
+                        (presentCount.toDouble() / weeks.size) * 100
                     }
             }
 

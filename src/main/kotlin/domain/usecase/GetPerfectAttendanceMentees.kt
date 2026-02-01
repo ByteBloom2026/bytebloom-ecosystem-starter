@@ -2,6 +2,7 @@ package domain.usecase
 import data.repository.AttendanceRepository
 import data.repository.MenteeRepository
 import domain.model.Mentee
+import domain.model.AttendanceState
 class GetPerfectAttendanceMentees (
     private val attendanceRepository: AttendanceRepository,
     private val menteeRepository: MenteeRepository
@@ -10,8 +11,8 @@ class GetPerfectAttendanceMentees (
     operator fun invoke(): List<Mentee> =
         menteeRepository.getAllMentees()
             .filter { mentee -> attendanceRepository.getAttendanceByMenteeId(mentee.id)
-                    ?.weeks
-                    ?.all { it.uppercase() == "PRESENT" }
-                    ?: false
+                ?.weeks
+                ?.all { it == AttendanceState.PRESENT }
+                ?: false
             }
 }

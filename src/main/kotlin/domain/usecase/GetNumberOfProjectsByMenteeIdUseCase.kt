@@ -1,8 +1,6 @@
 package domain.usecase
-
 import data.repository.MenteeRepository
 import data.repository.ProjectRepository
-
 class GetNumberOfProjectsByMenteeIdUseCase(
     private val menteeRepository: MenteeRepository,
     private val projectsRepository: ProjectRepository

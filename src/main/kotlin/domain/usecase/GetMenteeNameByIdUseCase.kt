@@ -1,8 +1,5 @@
 package domain.usecase
-
 import data.repository.MenteeRepository
-
-
 class GetMenteeNameByIdUseCase(
     private val menteeRepository: MenteeRepository
 ) {

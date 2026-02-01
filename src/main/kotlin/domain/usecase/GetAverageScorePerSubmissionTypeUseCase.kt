@@ -1,8 +1,6 @@
 package domain.usecase
-
 import domain.model.SubmissionType
 import data.repository.PerformanceRepository
-
 class GetAverageScorePerSubmissionTypeUseCase(
     private val performanceRepository: PerformanceRepository
 ) {
