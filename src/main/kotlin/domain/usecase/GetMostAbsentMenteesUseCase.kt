@@ -3,7 +3,7 @@ import data.repository.AttendanceRepository
 import data.repository.MenteeRepository
 import domain.model.Mentee
 import domain.model.AttendanceState
-class GetMostAbsentMentees (
+class GetMostAbsentMenteesUseCase (
     private val menteeRepository: MenteeRepository,
     private val attendanceRepository: AttendanceRepository
 ){
@@ -13,7 +13,7 @@ class GetMostAbsentMentees (
                 attendanceRepository.getAttendanceByMenteeId(mentee.id)
                     ?.weeks
                     ?.let { weeks ->
-                        val absentCount = weeks.count { it != AttendanceState.PRESENT}
+                        val absentCount = weeks.count { it == AttendanceState.PRESENT}
                         mentee to absentCount
                     }
             }

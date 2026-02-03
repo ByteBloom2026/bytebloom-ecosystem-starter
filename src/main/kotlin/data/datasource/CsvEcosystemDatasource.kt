@@ -2,7 +2,7 @@ package data.datasource
 import data.datasource.model.*
 import data.EcoSystemDataSource
 import java.io.File
-class CsvEcosystemDataSource(
+class CsvEcosystemDataSource private constructor(
     menteeFile: File, teamFile: File, performanceFile: File, projectFile: File, attendanceFile: File
 ) : EcoSystemDataSource {
     private val menteeLines = menteeFile.readLines().drop(1)
@@ -52,4 +52,26 @@ class CsvEcosystemDataSource(
     }
     override fun getAttendanceByMenteeId(menteeId: String): AttendanceRow? =
         getAttendances().find { it.menteeId == menteeId }
+    companion object {
+        @Volatile
+        private var instance: CsvEcosystemDataSource? = null
+
+        fun getInstance(
+            menteeFile: File,
+            teamFile: File,
+            performanceFile: File,
+            projectFile: File,
+            attendanceFile: File
+        ): CsvEcosystemDataSource {
+            return instance ?: synchronized(this) {
+                instance ?: CsvEcosystemDataSource(
+                    menteeFile,
+                    teamFile,
+                    performanceFile,
+                    projectFile,
+                    attendanceFile
+                ).also { instance = it }
+            }
+        }
+    }
 }

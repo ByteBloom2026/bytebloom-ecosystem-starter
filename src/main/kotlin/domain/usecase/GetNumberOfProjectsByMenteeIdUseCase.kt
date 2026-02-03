@@ -11,6 +11,6 @@ class GetNumberOfProjectsByMenteeIdUseCase(
             ?: return 0
         val teamId = mentee.teamId
         return projectsRepository.getAllProjects()
-            .count { it.assingedTeamId == teamId }
+            .count { it.assignedTeamId == teamId }
     }
 }

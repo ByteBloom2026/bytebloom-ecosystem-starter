@@ -10,10 +10,10 @@ class IsMenteeInTeamUseCase(
         val mentee = menteeRepository.getAllMentees()
             .find { it.id == menteeId }
             ?: return false
-        return IsmenteeInTheTeam(mentee, teamName)
+        return ismenteeInTheTeam(mentee, teamName)
     }
 
-    private fun IsmenteeInTheTeam(mentee: Mentee, teamName: String): Boolean {
+    private fun ismenteeInTheTeam(mentee: Mentee, teamName: String): Boolean {
         return teamRepository.getAllTeams()
             .find { it.id == mentee.teamId }
             ?.name == teamName
