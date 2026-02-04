@@ -1,7 +1,9 @@
 package data.datasource
 
 import data.datasource.model.*
+import domain.*
 import data.EcoSystemDataSource
+import domain.model.SubmissionType
 import java.io.File
 
 class CsvEcosystemDataSource private constructor(
@@ -40,7 +42,7 @@ class CsvEcosystemDataSource private constructor(
             List<PerformanceRow> = performanceLines.map {
         val parts = it.split(",")
         PerformanceRow(
-            parts[0].trim(), parts[1].trim(),
+            parts[0].trim(), SubmissionType.valueOf(parts[1].trim().uppercase()),
             parts[2].trim().toDoubleOrNull() ?: 0.0,
             parts[3].trim()
         )
