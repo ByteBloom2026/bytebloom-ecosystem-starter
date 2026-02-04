@@ -1,9 +1,5 @@
 package data
-import data.datasource.model.AttendanceRow
-import data.datasource.model.MenteeRow
-import data.datasource.model.PerformanceRow
-import data.datasource.model.ProjectRow
-import data.datasource.model.TeamRow
+import data.datasource.model.*
 interface EcoSystemDataSource {
     fun getMentees(): List<MenteeRow>
     fun getMenteeById(id: String): MenteeRow?
