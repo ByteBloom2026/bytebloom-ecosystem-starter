@@ -58,6 +58,34 @@ These observations stem from my appreciation for the quality of the foundation y
 
 [// Al Batool Baraka notes]()
 
+Nice work on the foundation! To level up the project, we've gathered some insights on Clean Architecture and SOLID principles. Let’s discuss the following points:
+
+---
+
+## 🏗️ Technical Architecture & Improvements
+
+### 1. Decoupling the Parsing Logic (SRP)
+* **Observation:** In `CsvEcosystemDataSource`, the parsing logic and data management are tightly coupled.
+* **Recommendation:** Extract the parsing logic into a standalone `Parser` class. This ensures the `DataSource` is solely responsible for managing lists and search operations, adhering to the **Single Responsibility Principle (SRP)**.
+* **Note on Mappers:** While `MenteeMapper` is a great addition, many classes still handle logic for empty values. This should be centralized within the **Mapper** or **Parser** level to keep the core logic clean.
+
+### 2. Interface Segregation (ISP)
+* **Observation:** The `EcosystemDataSource` interface is currently "fat," containing unrelated methods (e.g., `getProjectByTeamId`). This forces implementing classes like `AttendanceRepositoryImpl` to depend on methods they do not require.
+* **Recommendation:** Apply the **Interface Segregation Principle (ISP)** by splitting the large interface into smaller, focused ones. This prevents "Interface Pollution" and simplifies implementation.
+
+### 3. Domain-Driven Design & Dependency Inversion (DIP)
+* **Interface Placement:** To align with **Clean Architecture**, Repository and DataSource interfaces should be moved to the **Domain Layer**.
+    * *Why?* The Domain should define the "Contract," making the Data Layer a replaceable implementation detail.
+* **Repository Logic:** We suggest the `DataSource` only provides a raw `getAll()` method. Business-specific logic, such as filtering or finding records (e.g., `getAttendanceByMenteeId`), should reside within the **Repository** to keep the DataSource as a simple data provider.
+
+### 4. UseCase Standardization
+* **Recommendation:** Implement a `BaseUseCase` to standardize the structure of all UseCases. This improves readability and ensures architectural consistency as the project scales.
+
+### 5. Main Class Responsibilities
+* **Observation:** The `Main` class is currently overloaded with tasks like printing results and handling manual logic checks.
+* **Recommendation:** In accordance with **SOLID principles**, the `Main` class should only handle initialization. Output formatting and business logic should be delegated to their respective layers to avoid high coupling.
+
+---
 
 
 
