@@ -6,7 +6,6 @@
 * Led the design of the core data structure by creating all required Data Classes.  
 * Developed the team parsing function parseTeamData and ensured its seamless integration within the CsvParsers.kt file.
 * Contributed to unifying and organizing the parser structure with a clear and logical project architecture
-
 >##### [IbtisamSafi](): ⚙️ Mentee & Performance Parsing
 * Implemented the parsing functions for mentee and performance data (parseMenteeData and parsePerformanceData).  
 * Assisted in data cleaning and proper formatting during the parsing process.  
