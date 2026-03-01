@@ -10,7 +10,7 @@ data class Project private constructor(
     companion object {
         private val nameValidator = ProjectNameValidator()
         private val teamIdValidator = TeamIdValidator()
-        fun create(id: String, name: String, assignedTeamId: String): Project {
+        fun create(id: String, name: String, assignedTeamId: String): Any {
             if (id.trim().isEmpty()) {
                 return ValidationResult.failure("projectId", "Project id is required.")
             }

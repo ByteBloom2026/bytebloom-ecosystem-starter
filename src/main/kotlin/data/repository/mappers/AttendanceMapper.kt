@@ -2,7 +2,8 @@ package data.repository.mappers
 import data.datasource.model.AttendanceRow
 import domain.model.Attendance
 import domain.model.AttendanceState
-fun AttendanceRow.toDomain(): Attendance =
+import domain.validation.ValidationResult
+fun AttendanceRow.toDomain(): ValidationResult<Attendance> =
     Attendance.create( menteeId = menteeId,
         weeks = weeks.split(",").map {
             when (it.trim().uppercase()) {

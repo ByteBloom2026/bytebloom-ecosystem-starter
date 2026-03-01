@@ -7,9 +7,6 @@ class ColumnsCountValidator(private val expectedColumns: Int):Validator<List<Str
         } else {
             Result.failure(
                 IllegalArgumentException(
-                    "Wrong number of columns: expected=$expectedColumns, got=${input.size}"
-                )
-            )
-        }
+                    "Wrong number of columns: expected=$expectedColumns, got=${input.size}")) }
     }
 }

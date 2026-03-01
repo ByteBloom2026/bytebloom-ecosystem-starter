@@ -5,8 +5,14 @@ import domain.model.Project
 class ProjectRepositoryImpl(
     private val dataSource: EcoSystemDataSource
 ) : ProjectRepository {
-    override fun getAllProjects(): List<Project> =
-        dataSource.getProjects().map { it.toDomain() }
-    override fun getProjectByTeamId(teamId: String): Project? =
-        dataSource.getProjectByTeamId(teamId)?.toDomain()
+    override fun getAllProjects(): Result<List<Project>> {
+        return dataSource.getProjects().map { list ->
+            list.map { it.toDomain() }
+        }
+    }
+    override fun getProjectByTeamId(teamId: String): Result<Project?> {
+        return dataSource.getProjectByTeamId(teamId).map { project ->
+            project?.toDomain()
+        }
+    }
 }

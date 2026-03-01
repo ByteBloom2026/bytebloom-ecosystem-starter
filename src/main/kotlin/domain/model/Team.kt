@@ -1,6 +1,6 @@
 package domain.model
 import domain.validation.validators.*
-import java.util.UUID
+import domain.validation.ValidationResult
 
 data class Team  private constructor(
     val id: String,
@@ -14,22 +14,26 @@ data class Team  private constructor(
         mentorLead=mentorLead,
         projects=project
     )
-
     companion object {
         val teamNameValidator=TeamNameValidator()
         val menteeNameValidator=MenteeNameValidator()
 
-        fun create(id: String,name: String,mentorLead: String,projects: Project?): Team {
-            teamNameValidator.validate(name)
-            menteeNameValidator.validate(mentorLead)
-            return Team(
-                id ,
-                name ,
-                mentorLead ,
-                projects
+        fun create(id: String, name: String, mentorLead: String, projects: Project?): ValidationResult<Team> {
+            val nameResult = teamNameValidator.validate(name)
+            if (nameResult is ValidationResult.Failure)
+                return nameResult
+            val mentorResult = menteeNameValidator.validate(mentorLead)
+            if (mentorResult is ValidationResult.Failure)
+                return mentorResult
+            return ValidationResult.success(
+                Team(
+                    id = id,
+                    name = (nameResult as ValidationResult.Success).data,
+                    mentorLead = (mentorResult as ValidationResult.Success).data,
+                    projects = projects
+                )
             )
         }
     }
-
 
 }
