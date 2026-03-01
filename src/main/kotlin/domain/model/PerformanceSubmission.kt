@@ -13,7 +13,6 @@ data class PerformanceSubmission private constructor(
         score = score,
         menteeId = menteeId
     )
-
     companion object {
         private val submissionIdValidator = SubmissionIdValidator()
         private val submissionTypeValidator = SubmissionTypeValidator()
@@ -31,7 +30,6 @@ data class PerformanceSubmission private constructor(
                 menteeId)
         }
     }
-
     enum class SubmissionType {
         TASK, WORKSHOP, BOOK_CLUB
     }

@@ -3,7 +3,7 @@ import data.datasource.model.AttendanceRow
 import domain.model.Attendance
 import domain.model.AttendanceState
 fun AttendanceRow.toDomain(): Attendance =
-    Attendance( menteeId = menteeId,
+    Attendance.create( menteeId = menteeId,
         weeks = weeks.split(",").map {
             when (it.trim().uppercase()) {
                 "PRESENT" -> AttendanceState.PRESENT

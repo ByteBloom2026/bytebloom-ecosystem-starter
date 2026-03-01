@@ -8,7 +8,7 @@ data class Attendance private constructor(
     companion object {
         private val idValidator = MenteeIdValidator()
 
-        fun create(menteeId: String, weeks: List<AttendanceState>): ValidationResult<Attendance> {
+        fun create(menteeId: String, weeks: List<AttendanceState>): Attendance {
             val idResult = idValidator.validate(menteeId)
             if (idResult is ValidationResult.Failure) return idResult
             if (weeks.isEmpty()) {
@@ -18,9 +18,7 @@ data class Attendance private constructor(
             return ValidationResult.success(
                 Attendance(
                     menteeId = cleanId,
-                    weeks = weeks
-                )
-            )
+                    weeks = weeks))
         }
     }
 }
