@@ -1,7 +1,6 @@
 package data.datasource
 
 import data.datasource.model.*
-import domain.*
 import data.EcoSystemDataSource
 import data.validator.ColumnsCountValidator
 import data.validator.FilePathValidator
