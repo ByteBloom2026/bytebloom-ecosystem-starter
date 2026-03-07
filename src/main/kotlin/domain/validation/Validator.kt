@@ -5,5 +5,5 @@ interface Validator<T> {
 }
 
 interface EcosystemValidator<T>{
-    fun validate(data: T): Result<T>
+    fun validate(data: T): T
 }

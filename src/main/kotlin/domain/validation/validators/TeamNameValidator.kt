@@ -6,12 +6,12 @@ import domain.validation.EcosystemValidator
 
 class TeamNameValidator : EcosystemValidator<String> {
     private val minLength: Int = 3
-    override fun validate(data: String): Result<String> {
-        val value = data.trim()
-        if (value.isEmpty())
-            return Result.failure(EmptyTeamNameException())
-        if (value.length < minLength)
-            return Result.failure(InvalidTeamNameLengthException())
-        return Result.success(value)
+    override fun validate(data: String): String {
+        val trimmedTeamName = data.trim()
+        if (trimmedTeamName.isEmpty())
+            throw EmptyTeamNameException()
+        if (trimmedTeamName.length < minLength)
+            throw InvalidTeamNameLengthException()
+        return trimmedTeamName
     }
 }

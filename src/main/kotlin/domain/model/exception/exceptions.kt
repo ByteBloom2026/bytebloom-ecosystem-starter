@@ -1,8 +1,11 @@
 package domain.model.exception
 
-class EmptyTeamNameException: Exception()
 
-class InvalidTeamNameLengthException: Exception()
+sealed class SearchTeamException : Throwable() {
+    class EmptyTeamNameException: SearchTeamException()
+
+    class InvalidTeamNameLengthException: SearchTeamException()
+}
 
 class EmptyMenteeNameException: Exception()
 
